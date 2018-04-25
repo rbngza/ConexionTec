@@ -26,12 +26,12 @@ public class MainActivity extends AppCompatActivity {
         viewPager=(ViewPager)findViewById(R.id.viewPager);
         indicator=(TabLayout)findViewById(R.id.indicator);
         color = new ArrayList<>();
-        color.add(Color.WHITE);
-        color.add(Color.WHITE);
-        color.add(Color.WHITE);
+        color.add(Color.RED);
+        color.add(Color.GREEN);
+        color.add(Color.BLUE);
 
         colorName = new ArrayList<>();
-        colorName.add("Recuerda usar tu calculadora en radianes.");
+        colorName.add("RED");
         colorName.add("GREEN");
         colorName.add("BLUE");
 
