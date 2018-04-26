@@ -1,5 +1,6 @@
 package itesm.mx.conexiontec;
 
+import android.app.Fragment;
 import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     List<Integer> color;
     List<String> colorName;
 
+    Fragment fragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
         viewPager=(ViewPager)findViewById(R.id.viewPager);
         indicator=(TabLayout)findViewById(R.id.indicator);
         color = new ArrayList<>();
-        color.add(Color.RED);
-        color.add(Color.GREEN);
-        color.add(Color.BLUE);
+        color.add(Color.WHITE);
+        color.add(Color.WHITE);
+        color.add(Color.WHITE);
 
         colorName = new ArrayList<>();
         colorName.add("RED");
@@ -38,8 +41,20 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(new SliderAdapter(this, color, colorName));
         indicator.setupWithViewPager(viewPager, true);
 
+        fragment = new MenuFragment();
+        loadFragment(fragment);
+
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new SliderTimer(), 4000, 6000);
+
+
+    }
+
+    private void loadFragment(Fragment fragment) {
+        android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     private class SliderTimer extends TimerTask {
