@@ -41,10 +41,6 @@ public class EventOperations {
         return null;
     }
 
-    //...and back to a Date
-    public static Date loadDate(Long time) {
-        return new Date(time);
-    }
 
     public long addExam (Historial historial) {
         long newRowId = 0;

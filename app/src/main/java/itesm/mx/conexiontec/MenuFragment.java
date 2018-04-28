@@ -8,12 +8,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MenuFragment extends ListFragment {
+public class MenuFragment extends Fragment {
     View view;
     ListView listView;
 
@@ -35,8 +36,14 @@ public class MenuFragment extends ListFragment {
 
         view = inflater.inflate(R.layout.fragment_list, container, false);
 
-        listView =(ListView)view.findViewById(R.id.lista);
+        listView =(ListView)view.findViewById(R.id.list);
         listView.setAdapter((ListAdapter) new MenuListAdapter(getActivity(),menuList));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
+
+            }
+        });
 
         return view;
     }

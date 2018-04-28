@@ -15,32 +15,67 @@ public class Problemas implements Parcelable {
     };
 
     private String tipo;
-    private String parte1;
-    private String parte2;
-    private String parte3;
+    private Double velcorte;
+    private Double diametro;
+    private Double rpm;
+    private Double velavance;
+    private Double avancepordiente;
+    private Double numdedientes;
+    private Double avanceporrev;
+    private Double volenmm3;
 
 
-    public Problemas (String title){
+
+    public Problemas (String tipo, Double velcorte, Double diametro, Double rpm, Double velavance, Double avancepordiente, Double numdedientes, Double avanceporrev, Double volenmm3){
         this.tipo = tipo;
+        this.velcorte = velcorte;
+        this.diametro = diametro;
+        this.rpm = rpm;
+        this.velavance = velavance;
+        this.avancepordiente = avancepordiente;
+        this.numdedientes = numdedientes;
+        this.avanceporrev = avanceporrev;
+        this.volenmm3 = volenmm3;
     }
 
     public void setTipo(String title) {this.tipo = tipo;}
     public String getTipo(){return tipo;}
 
-    public void setParte1(String parte1) {this.parte1 = parte1;}
-    public String getParte1(){return parte1;}
+    public void setVelcorte (Double velcorte) {this.velcorte = velcorte;}
+    public Double getVelcorte (){return velcorte;}
 
-    public void setParte2(String parte2) {this.parte2 = parte2;}
-    public String getParte2(){return parte2;}
+    public void setDiametro (Double diametro) {this.diametro = diametro;}
+    public Double getDiametro (){return diametro;}
 
-    public void setParte3(String parte3) {this.parte3 = parte3;}
-    public String getParte3(){return parte3;}
+    public void setRpm (Double rpm) {this.rpm = rpm;}
+    public Double getRpm (){return rpm;}
+
+    public void setVelavance (Double velavance) {this.velavance = velavance;}
+    public Double getVelavance (){return velavance;}
+
+    public void setAvancepordiente (Double avancepordiente) {this.avancepordiente = avancepordiente;}
+    public Double getAvancepordiente (){return avancepordiente;}
+
+    public void setNumdedientes (Double numdedientes) {this.numdedientes = numdedientes;}
+    public Double getNumdedientes (){return numdedientes;}
+
+    public void setAvanceporrev (Double avanceporrev) {this.avanceporrev = avanceporrev;}
+    public Double getAvanceporrev (){return avanceporrev;}
+
+    public void setVolenmm3 (Double volenmm3) {this.volenmm3 = volenmm3;}
+    public Double getVolenmm3 (){return volenmm3;}
+
 
     public Problemas(Parcel in){
         this.tipo = in.readString();
-        this.parte1 = in.readString();
-        this.parte2 = in.readString();
-        this.parte3 = in.readString();
+        this.velcorte = in.readDouble();
+        this.diametro = in.readDouble();
+        this.rpm = in.readDouble();
+        this.velavance = in.readDouble();
+        this.avancepordiente = in.readDouble();
+        this.numdedientes = in.readDouble();
+        this.avanceporrev = in.readDouble();
+        this.volenmm3 = in.readDouble();
 
     }
 
@@ -52,8 +87,14 @@ public class Problemas implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.tipo);
-        dest.writeString(this.parte1);
-        dest.writeString(this.parte2);
-        dest.writeString(this.parte3);
+        dest.writeDouble(this.velcorte);
+        dest.writeDouble(this.diametro);
+        dest.writeDouble(this.rpm);
+        dest.writeDouble(this.velavance);
+        dest.writeDouble(this.avancepordiente);
+        dest.writeDouble(this.numdedientes);
+        dest.writeDouble(this.avanceporrev);
+        dest.writeDouble(this.volenmm3);
+
     }
 }
