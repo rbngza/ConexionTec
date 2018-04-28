@@ -1,6 +1,9 @@
 package itesm.mx.conexiontec;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.app.ListFragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +13,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MenuFragment extends Fragment {
-
+public class MenuFragment extends ListFragment {
     View view;
     ListView listView;
 
@@ -19,6 +21,8 @@ public class MenuFragment extends Fragment {
         MainMenu mainMenu;
         ArrayList<MainMenu> listMenu = new ArrayList<MainMenu>();
         mainMenu = new MainMenu("Quick exam");
+        listMenu.add(mainMenu);
+        mainMenu = new MainMenu("Glosario");
         listMenu.add(mainMenu);
 
         return listMenu;
@@ -36,5 +40,7 @@ public class MenuFragment extends Fragment {
 
         return view;
     }
+
+
 
 }

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         color.add(Color.WHITE);
 
         colorName = new ArrayList<>();
-        colorName.add("RED");
+        colorName.add("El arroz contiene 30% de los carbohidratos recomendados al dia.");
         colorName.add("GREEN");
         colorName.add("BLUE");
 
