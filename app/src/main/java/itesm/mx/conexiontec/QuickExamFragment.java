@@ -4,7 +4,7 @@ package itesm.mx.conexiontec;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -23,6 +24,7 @@ public class QuickExamFragment extends Fragment {
     Double velcorte, diametro, revpormin, avancepordiente, numdedientes, veldeavance, avanceporrev, volumenmm3;
     TextView tvPregunta;
     Switch swHint;
+
 
     public QuickExamFragment() {
         // Required empty public constructor
@@ -41,7 +43,7 @@ public class QuickExamFragment extends Fragment {
         tvPregunta = (TextView) v.findViewById(R.id.pregunta);
         swHint = (Switch) v.findViewById(R.id.switchrespuesta);
         final EditText etRespuesta = (EditText) v.findViewById(R.id.respuesta);
-
+        updateQuestion();
         btnNextQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +51,7 @@ public class QuickExamFragment extends Fragment {
                     if (!((etRespuesta.getText().toString()).matches(""))) {
                         Double respuesta = Double.parseDouble(etRespuesta.getText().toString());
                         if (checaRespuesta(respuesta)){
-
+                            Toast.makeText(getActivity(), "Wow la sacaste bien", Toast.LENGTH_LONG).show();
                         }
                     }
                 } else {
@@ -96,6 +98,7 @@ public class QuickExamFragment extends Fragment {
         veldeavance = 0 + (100 - 0) * r.nextDouble();
         avanceporrev = 0 + (100 - 0) * r.nextDouble();
         volumenmm3 = 0 + (100 - 0) * r.nextDouble();
+        pregunta = " ";
         if (i1 <= 333){
             tipo = 1;
             int i2 = (r.nextInt(1000) + 0);
@@ -147,6 +150,8 @@ public class QuickExamFragment extends Fragment {
                         "RPM = " + Double.toString(revpormin);
             }
         }
+
+        tvPregunta.setText(pregunta);
     }
 
     public boolean checaRespuesta(Double ans){
@@ -163,15 +168,15 @@ public class QuickExamFragment extends Fragment {
             }
         } else if (tipo == 2){
             if (subtipo == 1){
-                if (veldeavance/(revpormin*numdedientes)==ans){
+                if ((veldeavance/(revpormin*numdedientes))==ans){
                     respuesta = true;
                 }
             } else if (subtipo == 2){
-                if (veldeavance/(revpormin*avancepordiente)==ans){
+                if ((veldeavance/(revpormin*avancepordiente))==ans){
                     respuesta = true;
                 }
             } else if (subtipo == 3){
-                
+
             }
         } else if (tipo == 3){
             if (subtipo == 1){

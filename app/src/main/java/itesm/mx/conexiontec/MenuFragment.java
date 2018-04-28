@@ -2,7 +2,7 @@ package itesm.mx.conexiontec;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.ListFragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -41,7 +41,15 @@ public class MenuFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
+                if (position == 0){
+                    QuickExamFragment fragment = new QuickExamFragment();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_container, fragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                } else if (position == 1){
 
+                }
             }
         });
 
