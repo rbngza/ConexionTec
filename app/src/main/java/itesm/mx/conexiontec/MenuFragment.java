@@ -48,7 +48,11 @@ public class MenuFragment extends Fragment {
                     transaction.addToBackStack(null);
                     transaction.commit();
                 } else if (position == 1){
-
+                    GlosarioFragment fragment = new GlosarioFragment();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_container, fragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
                 }
             }
         });

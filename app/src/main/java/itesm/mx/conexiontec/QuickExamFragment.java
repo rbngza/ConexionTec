@@ -1,14 +1,18 @@
 package itesm.mx.conexiontec;
 
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -24,8 +28,8 @@ public class QuickExamFragment extends Fragment {
     Double velcorte, diametro, revpormin, avancepordiente, numdedientes, veldeavance, avanceporrev, volumenmm3;
     TextView tvPregunta;
     Switch swHint;
-
-
+    TextView tvHint;
+    String ayuda = "AYUUUDAAA";
     public QuickExamFragment() {
         // Required empty public constructor
     }
@@ -42,17 +46,35 @@ public class QuickExamFragment extends Fragment {
         Button btnNextQ = (Button) v.findViewById(R.id.nextquestion);
         tvPregunta = (TextView) v.findViewById(R.id.pregunta);
         swHint = (Switch) v.findViewById(R.id.switchrespuesta);
+        tvHint = (TextView) v.findViewById(R.id.text_help);
         final EditText etRespuesta = (EditText) v.findViewById(R.id.respuesta);
         updateQuestion();
+        swHint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @SuppressLint("WrongConstant")
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                tvHint.setVisibility(1);
+                tvHint.setText(ayuda);
+            }
+        });
         btnNextQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (preguntas < 10){
                     if (!((etRespuesta.getText().toString()).matches(""))) {
+                        View view = getActivity().getCurrentFocus();
+                        if (view != null) {
+                            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        }
                         Double respuesta = Double.parseDouble(etRespuesta.getText().toString());
+                        preguntas++;
                         if (checaRespuesta(respuesta)){
                             Toast.makeText(getActivity(), "Wow la sacaste bien", Toast.LENGTH_LONG).show();
+                        } else {
+                            incorrectos++;
+                            Toast.makeText(getActivity(), "La sacaste mal.", Toast.LENGTH_LONG).show();
                         }
+                        updateQuestion();
                     }
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -91,13 +113,14 @@ public class QuickExamFragment extends Fragment {
         Random r = new Random();
         int i1 = (r.nextInt(999) + 0);
         String pregunta;
-        velcorte = 0 + (100 - 0) * r.nextDouble();
-        diametro = 0 + (100 - 0) * r.nextDouble();
-        avancepordiente = 0 + (100 - 0) * r.nextDouble();
-        numdedientes = 0 + (100 - 0) * r.nextDouble();
-        veldeavance = 0 + (100 - 0) * r.nextDouble();
-        avanceporrev = 0 + (100 - 0) * r.nextDouble();
-        volumenmm3 = 0 + (100 - 0) * r.nextDouble();
+        velcorte = round((0 + (100 - 0) * r.nextDouble()), 0);
+        diametro = round((0 + (100 - 0) * r.nextDouble()), 0);
+        avancepordiente = round((0 + (100 - 0) * r.nextDouble()), 0);
+        numdedientes = round((0 + (100 - 0) * r.nextDouble()), 0);
+        veldeavance = round((0 + (100 - 0) * r.nextDouble()), 0);
+        avanceporrev = round((0 + (100 - 0) * r.nextDouble()), 0);
+        volumenmm3 = round((0 + (100 - 0) * r.nextDouble()), 0);
+        revpormin = round((0 + (100 - 0) * r.nextDouble()), 0);
         pregunta = " ";
         if (i1 <= 333){
             tipo = 1;
@@ -120,7 +143,7 @@ public class QuickExamFragment extends Fragment {
                 subtipo = 1;
                 pregunta = "Saca el avance por diente con las siguientes variables \n" +
                         "Velocidad de avance = " + Double.toString(veldeavance) +"\n" +
-                        "RPM = " + Double.toString(revpormin) +
+                        "RPM = " + Double.toString(revpormin) + "\n" +
                         "# de dientes = " + Double.toString(numdedientes) ;
             } else if (i2 > 250 && i2 <=500){
                 subtipo = 2;
@@ -187,6 +210,15 @@ public class QuickExamFragment extends Fragment {
         }
 
         return respuesta;
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 
 }
