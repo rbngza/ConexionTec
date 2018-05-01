@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
         viewPager=(ViewPager)findViewById(R.id.viewPager);
         indicator=(TabLayout)findViewById(R.id.indicator);
         color = new ArrayList<>();
-        color.add(Color.WHITE);
-        color.add(Color.WHITE);
-        color.add(Color.WHITE);
+        color.add(Color.GRAY);
+        color.add(Color.GRAY);
+        color.add(Color.GRAY);
 
         colorName = new ArrayList<>();
         colorName.add("Recuerda usar tu calculadora en GRADOS.");
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
-        mTitleTextView.setText("My Own Title");
+        mTitleTextView.setText("SIM-MULATOR");
 
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);

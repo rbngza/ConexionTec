@@ -22,12 +22,11 @@ public class Historial implements Parcelable {
 
 
 
-    public Historial (String tipo, int preguntas, int correctas, int incorrectas, boolean lastexam){
+    public Historial (String tipo, int preguntas, int correctas, int incorrectas){
         this.tipo = tipo;
         this.preguntas = preguntas;
         this.correctas = correctas;
         this.incorrectas = incorrectas;
-        this.lastexam = lastexam;
     }
 
     public void setTipo(String title) {this.tipo = tipo;}
@@ -42,15 +41,12 @@ public class Historial implements Parcelable {
     public void setIncorrectas(int incorrectas) {this.incorrectas = incorrectas;}
     public int getIncorrectas(){return incorrectas;}
 
-    public void setLastexam(boolean lastexam) {this.lastexam = lastexam;}
-    public boolean getLastexam(){return lastexam;}
 
     public Historial(Parcel in){
         this.tipo = in.readString();
         this.preguntas = in.readInt();
         this.correctas = in.readInt();
         this.incorrectas = in.readInt();
-        this.lastexam = in.readByte() != 0;
     }
 
     @Override
@@ -64,6 +60,5 @@ public class Historial implements Parcelable {
         dest.writeInt(this.preguntas);
         dest.writeInt(this.correctas);
         dest.writeInt(this.incorrectas);
-        dest.writeByte((byte) (lastexam ? 1 : 0));
     }
 }

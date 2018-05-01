@@ -25,9 +25,12 @@ public class QuickExamFragment extends Fragment {
     int preguntas = 1;
     int correctos = 0;
     int incorrectos = 0;
+    String type = "QuickExam";
     Double velcorte, diametro, revpormin, avancepordiente, numdedientes, veldeavance, avanceporrev, volumenmm3;
     TextView tvPregunta;
     Switch swHint;
+    EventOperations dao;
+    boolean switch2 = false;
     TextView tvHint;
     String ayuda = "AYUUUDAAA";
     public QuickExamFragment() {
@@ -52,8 +55,16 @@ public class QuickExamFragment extends Fragment {
         swHint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @SuppressLint("WrongConstant")
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                tvHint.setVisibility(1);
-                tvHint.setText(ayuda);
+                if (switch2){
+                    tvHint.setVisibility(0);
+                    tvHint.setText(" ");
+                    switch2 = false;
+                } else {
+                    tvHint.setVisibility(1);
+                    tvHint.setText(ayuda);
+                    switch2 = true;
+                }
+
             }
         });
         btnNextQ.setOnClickListener(new View.OnClickListener() {
@@ -77,8 +88,12 @@ public class QuickExamFragment extends Fragment {
                         updateQuestion();
                     }
                 } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    dao = new EventOperations(getActivity());
+                    dao.open();
+                    Historial historial = new Historial(type, preguntas, correctos, incorrectos);
+                    dao.addExam(historial);
 
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setCancelable(true);
                     builder.setTitle("Felicidades! Terminaste el examen.");
                     builder.setMessage("Tu puntuacion fue de: " + String.valueOf(correctos) + " de 10 problemas correctos\n Deseas jugar de nuevo?");
@@ -130,11 +145,13 @@ public class QuickExamFragment extends Fragment {
                 pregunta = "Saca las RPM con las siguientes variables \n" +
                         "Velocidad de corte = " + Double.toString(velcorte) +"\n" +
                         "Diamtetro = " + Double.toString(diametro);
+                ayuda = "((Math.PI*diametro)/1000)";
             } else if (i2 > 500 && i2 <=1000){
                 subtipo = 2;
                 pregunta = "Saca la Velocidad de corte con las siguientes variables \n" +
                         "RPM = " + Double.toString(revpormin) +"\n" +
                         "Diamtetro = " + Double.toString(diametro);
+                ayuda = "((velcorte*1000)/(Math.PI*diametro))";
             }
         }else if (i1 > 333 && i1 <=666){
             tipo = 2;
@@ -145,12 +162,14 @@ public class QuickExamFragment extends Fragment {
                         "Velocidad de avance = " + Double.toString(veldeavance) +"\n" +
                         "RPM = " + Double.toString(revpormin) + "\n" +
                         "# de dientes = " + Double.toString(numdedientes) ;
+                ayuda = "(veldeavance/(revpormin*numdedientes))";
             } else if (i2 > 250 && i2 <=500){
                 subtipo = 2;
                 pregunta = "Saca el Numero de dientes con las siguientes variables \n" +
                         "Velocidad de avance = " + Double.toString(veldeavance) +"\n" +
                         "RPM = " + Double.toString(revpormin) + "\n" +
                         "Avance por diente = " + Double.toString(avancepordiente);
+                ayuda = "(veldeavance/(revpormin*avancepordiente))";
             } else if (i2 > 500 && i2 <= 1000){
                 subtipo = 3;
                 pregunta = "Saca la Velocidad de avance con las siguientes variables \n" +
@@ -199,7 +218,9 @@ public class QuickExamFragment extends Fragment {
                     respuesta = true;
                 }
             } else if (subtipo == 3){
-
+                if ((veldeavance/(revpormin*avancepordiente))==ans){
+                    respuesta = true;
+                }
             }
         } else if (tipo == 3){
             if (subtipo == 1){

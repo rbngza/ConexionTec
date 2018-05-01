@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class EventDBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "EventDB.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public EventDBHelper(Context context) {
         //Create database
@@ -23,8 +23,7 @@ public class EventDBHelper extends SQLiteOpenHelper {
                 DataBaseSchema.EventTable.COLUMN_NAME_TIPO + " TEXT," +
                 DataBaseSchema.EventTable.COLUMN_NAME_PREGUNTAS + " INTEGER," +
                 DataBaseSchema.EventTable.COLUMN_NAME_CORRECTAS + " INTEGER," +
-                DataBaseSchema.EventTable.COLUMN_NAME_INCORRECTAS + " INTEGER," +
-                DataBaseSchema.EventTable.COLUMN_NAME_LASTEXAM + " BOOLEAN" +
+                DataBaseSchema.EventTable.COLUMN_NAME_INCORRECTAS + " INTEGER" +
                 ")";
         Log.i("Eventhelper onCreate", CREATE_EVENTS_TABLE);
         db.execSQL(CREATE_EVENTS_TABLE);
