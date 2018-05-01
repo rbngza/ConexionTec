@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
         color.add(Color.GRAY);
 
         colorName = new ArrayList<>();
-        colorName.add("Recuerda usar tu calculadora en GRADOS.");
+        colorName.add("PI = 3.1416.");
         colorName.add("Todas las variables están en mm");
-        colorName.add("GAMEOVER, tronaste.");
+        colorName.add("Incluye 4 decimales en tus respuestas.");
 
         viewPager.setAdapter(new SliderAdapter(this, color, colorName));
         indicator.setupWithViewPager(viewPager, true);
@@ -70,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View v) {
-        Toast.makeText(this, "No functionallity added.", Toast.LENGTH_LONG).show();
+        fragment = new ExperienceFragment();
+        loadFragment(fragment);
     }
 
     private void loadFragment(Fragment fragment) {

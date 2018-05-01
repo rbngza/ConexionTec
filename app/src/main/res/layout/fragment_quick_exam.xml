@@ -45,7 +45,7 @@
         android:layout_marginStart="37dp"
         android:layout_marginTop="200dp"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/text_help"
         app:layout_constraintEnd_toStartOf="@+id/nextquestion"
         app:layout_constraintStart_toStartOf="parent"
