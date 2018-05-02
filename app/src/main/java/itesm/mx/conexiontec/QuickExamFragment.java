@@ -102,6 +102,11 @@ public class QuickExamFragment extends Fragment {
                     }
                     dao = new EventOperations(getActivity());
                     dao.open();
+                    View view = getActivity().getCurrentFocus();
+                    if (view != null) {
+                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
                     Historial historial = new Historial(type, preguntas, correctos, incorrectos);
                     dao.addExam(historial);
 

@@ -60,7 +60,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="200dp"
-        android:text="Button"
+        android:text="Check"
         app:layout_constraintBottom_toTopOf="@+id/switchrespuesta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/respuesta"
